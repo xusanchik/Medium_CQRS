@@ -2,6 +2,7 @@
 using MediatR;
 using Medium.Application.Absatractions;
 using Medium.Application.UseCases.MediumUser.Commands;
+using Medium.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,17 @@ namespace Medium.Application.UseCases.MediumSubject.Handler
             _mapper= mapper;
         }
 
-        public Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
+            var result = _mapper.Map<Subject>(request);
 
+            if (result is not null)
+            {
+                _applicationDbContext.Subjects.Add(result);
+                await _applicationDbContext.SaveChangesAsync();
+                return result;
+
+            }
         }
     }
 }
