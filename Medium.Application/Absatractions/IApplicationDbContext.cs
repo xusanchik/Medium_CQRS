@@ -11,6 +11,7 @@ namespace Medium.Application.Absatractions
     public interface IApplicationDbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken=default);
     }
 }

@@ -15,6 +15,7 @@ namespace Medium.Application.Absatractions.Mapper
         public AutoMapperProfile()
         {
             CreateMap<User, CreateUserCommand>().ReverseMap();
+            CreateMap<Subject , SubjectDTO>().ReverseMap();
         }
     }
 }
